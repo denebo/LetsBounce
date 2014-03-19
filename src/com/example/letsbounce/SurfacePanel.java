@@ -15,7 +15,7 @@ public class SurfacePanel extends SurfaceView implements SurfaceHolder.Callback 
 	  DrawThread drawThread;
 	  Bitmap ball;
 	  float x, y = 0;
-	  float speed = 10;
+	  float sx = 10, sy = 10;
 	public SurfacePanel(Context ctxt, AttributeSet attrSet) {
 		super(ctxt, attrSet);
 		context = ctxt;		
@@ -55,8 +55,17 @@ public class SurfacePanel extends SurfaceView implements SurfaceHolder.Callback 
 	}
 	
 	void doDraw(Canvas canvas) {
-		x += speed;
-		y += speed;
+		int SCREEN_WIDTH = canvas.getWidth();
+		int SCREEN_HEIGHT = canvas.getHeight();
+		
+		x += sx;
+		y += sy;
+		
+		if(x + ball.getWidth() >= SCREEN_WIDTH || x < 0)
+			sx = -sx;
+		if(y + ball.getHeight() >= SCREEN_HEIGHT || y < 0)
+			sy = -sy;
+		
 		Log.d("ASDF", "drawing");
 		canvas.drawColor(Color.CYAN);
 		canvas.drawBitmap(ball, x, y, null);
