@@ -1,6 +1,7 @@
 package com.example.letsbounce;
 
 import android.graphics.Bitmap;
+import android.util.Log;
 
 public class Entity {
 	float x, y, width, height;

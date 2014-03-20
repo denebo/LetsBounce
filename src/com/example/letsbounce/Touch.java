@@ -14,10 +14,7 @@ public class Touch {
 	}
 	
 	public boolean click() {
-		if(counter == 1 && clicking) {
-			clicking = false;
-			return true;
-		}
+		if(counter == 1 && clicking) return true;
 		return false;
 	}
 	

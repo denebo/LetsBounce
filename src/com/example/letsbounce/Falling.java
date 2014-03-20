@@ -30,7 +30,7 @@ public class Falling extends Entity {
 	
 	@Override
 	public void touch() {		
-		float dX = game.touch.x - getCenterX();
+		float dX = game.touch.x - getCenterX(); // we need to move left and right, so no abs() for dX
 		float dY = Math.abs(game.touch.y - y);
 		
 		double angle = Math.atan2(dY, dX);
@@ -40,6 +40,6 @@ public class Falling extends Entity {
 		mX -= fX;
 		mY -= fY;
 		
-		Log.d("ASDF", fX + ", " + fY);
+		Log.d("ASDF", "TOUCHING");
 	}
 }
