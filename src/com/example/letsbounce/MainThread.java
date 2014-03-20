@@ -34,5 +34,11 @@ public class MainThread extends Thread {
             surfaceHolder.unlockCanvasAndPost(mcanvas);
           }
       }
+      
+      try {
+    	  wait();
+      } catch (Exception e) {
+    	  Log.d("ASDF", e.getMessage());
+      }
   }
 }

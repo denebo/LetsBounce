@@ -13,14 +13,16 @@ public class SurfacePanel extends SurfaceView implements SurfaceHolder.Callback 
 	  Context context;
 	  MainThread drawThread;
 	  LetsBounce mGame;
+	  Touch touch;
 	  int touchCounter;
 
 	public SurfacePanel(Context ctxt, AttributeSet attrSet) {
 		super(ctxt, attrSet);
 		context = ctxt;	
-		mGame = new LetsBounce(ctxt);
-		SurfaceHolder holder = getHolder();
+		touch = new Touch();
 		touchCounter = 0;
+		mGame = new LetsBounce(ctxt, touch);
+		SurfaceHolder holder = getHolder();
 		holder.addCallback(this);
 	}
 	
@@ -44,7 +46,7 @@ public class SurfacePanel extends SurfaceView implements SurfaceHolder.Callback 
 			int format,
 			int width,
 			int height) {
-		
+		Log.d("ASDF","changed");
 	}
 	
 	@Override
@@ -61,14 +63,15 @@ public class SurfacePanel extends SurfaceView implements SurfaceHolder.Callback 
 	
 	@Override
 	public boolean onTouchEvent(MotionEvent e) {
+		touch.clicking = true;
 		touchCounter++;
-		if(touchCounter == 1){
-			Log.d("ASDF", e.getX() + ", " + e.getY());
-		}
 		
-		if(e.getAction() == MotionEvent.ACTION_UP) {
+		if(e.getAction() == MotionEvent.ACTION_UP)
 			touchCounter = 0;
-		}
+		
+		touch.counter = touchCounter;
+		touch.x = e.getX();
+		touch.y = e.getY();
 		
 	    return true;
 	}
