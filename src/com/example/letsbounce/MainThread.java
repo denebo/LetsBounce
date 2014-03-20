@@ -5,16 +5,14 @@ import android.graphics.Canvas;
 import android.util.Log;
 import android.view.SurfaceHolder;
 
-public class DrawThread extends Thread {
+public class MainThread extends Thread {
 	boolean mRun;
 	Canvas mcanvas;
 	Context context;
 	SurfaceHolder surfaceHolder;
 	SurfacePanel msurfacePanel;
 	
-	public DrawThread(SurfaceHolder sholder,
-			Context ctxt,
-			SurfacePanel spanel) {
+	public MainThread(SurfaceHolder sholder, Context ctxt, SurfacePanel spanel) {
 		surfaceHolder = sholder;
 		context = ctxt;
 		mRun = false;
@@ -31,10 +29,10 @@ public class DrawThread extends Thread {
       while(mRun) {
           mcanvas = surfaceHolder.lockCanvas();
           if(mcanvas != null) {
+        	msurfacePanel.mGame.process(); // game logic
             msurfacePanel.doDraw(mcanvas);
             surfaceHolder.unlockCanvasAndPost(mcanvas);
           }
       }
   }
-
 }

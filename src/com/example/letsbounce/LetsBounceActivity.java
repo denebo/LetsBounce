@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 
-public class SurfaceActivity extends Activity {
+public class LetsBounceActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,5 +19,4 @@ public class SurfaceActivity extends Activity {
         getMenuInflater().inflate(R.menu.surface, menu);
         return true;
     }
-    
 }

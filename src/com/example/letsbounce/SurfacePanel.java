@@ -1,26 +1,26 @@
 package com.example.letsbounce;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 public class SurfacePanel extends SurfaceView implements SurfaceHolder.Callback {
 	  Context context;
-	  DrawThread drawThread;
-	  Bitmap ball;
-	  float x, y = 0;
-	  float sx = 10, sy = 10;
+	  MainThread drawThread;
+	  LetsBounce mGame;
+	  int touchCounter;
+
 	public SurfacePanel(Context ctxt, AttributeSet attrSet) {
 		super(ctxt, attrSet);
-		context = ctxt;		
-		ball = BitmapFactory.decodeResource(context.getResources(), R.drawable.red);
+		context = ctxt;	
+		mGame = new LetsBounce(ctxt);
 		SurfaceHolder holder = getHolder();
+		touchCounter = 0;
 		holder.addCallback(this);
 	}
 	
@@ -49,25 +49,26 @@ public class SurfacePanel extends SurfaceView implements SurfaceHolder.Callback 
 	
 	@Override
 	public void surfaceCreated(SurfaceHolder holder) {
-	    drawThread = new DrawThread(holder, context, this);		
+	    drawThread = new MainThread(holder, context, this);		
 	    drawThread.setRunning(true);
 	    drawThread.start();
 	}
 	
 	void doDraw(Canvas canvas) {
-		int SCREEN_WIDTH = canvas.getWidth();
-		int SCREEN_HEIGHT = canvas.getHeight();
-		
-		x += sx;
-		y += sy;
-		
-		if(x + ball.getWidth() >= SCREEN_WIDTH || x < 0)
-			sx = -sx;
-		if(y + ball.getHeight() >= SCREEN_HEIGHT || y < 0)
-			sy = -sy;
-		
-		Log.d("ASDF", "drawing");
 		canvas.drawColor(Color.CYAN);
-		canvas.drawBitmap(ball, x, y, null);
+		canvas.drawBitmap(mGame.ball.getBitmap(), mGame.ball.getX(), mGame.ball.getY(), null);
+	}
+	
+	@Override
+	public boolean onTouchEvent(MotionEvent e) {
+		touchCounter++;
+		if(touchCounter == 1)
+			Log.d("ASDF", e.getX() + ", " + e.getY());
+		
+		if(e.getAction() == MotionEvent.ACTION_UP) {
+			touchCounter = 0;
+		}
+		
+	    return true;
 	}
 }
