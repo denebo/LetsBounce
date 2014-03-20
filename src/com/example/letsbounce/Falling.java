@@ -25,4 +25,6 @@ public class Falling extends Entity {
 	public void touch() {
 		
 	}
+	
+
 }

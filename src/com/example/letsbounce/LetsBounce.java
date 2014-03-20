@@ -7,6 +7,7 @@ public class LetsBounce {
 	Context context;
 	Falling ball;
 	
+	
 	public LetsBounce(Context context) {
 		this.context = context;
 		ball = new Falling(50, 50, 64, 64, 0.5f, BitmapFactory.decodeResource(context.getResources(), R.drawable.red));
@@ -14,5 +15,6 @@ public class LetsBounce {
 	
 	public void process() {
 		ball.process();
+			
 	}
 }

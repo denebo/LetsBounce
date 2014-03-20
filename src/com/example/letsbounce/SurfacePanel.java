@@ -62,8 +62,9 @@ public class SurfacePanel extends SurfaceView implements SurfaceHolder.Callback 
 	@Override
 	public boolean onTouchEvent(MotionEvent e) {
 		touchCounter++;
-		if(touchCounter == 1)
+		if(touchCounter == 1){
 			Log.d("ASDF", e.getX() + ", " + e.getY());
+		}
 		
 		if(e.getAction() == MotionEvent.ACTION_UP) {
 			touchCounter = 0;
