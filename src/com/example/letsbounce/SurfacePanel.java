@@ -21,7 +21,7 @@ public class SurfacePanel extends SurfaceView implements SurfaceHolder.Callback 
 		context = ctxt;	
 		touch = new Touch();
 		touchCounter = 0;
-		mGame = new LetsBounce(ctxt, touch, 0.1f);
+		mGame = new LetsBounce(ctxt, touch, 0.2f);
 		SurfaceHolder holder = getHolder();
 		holder.addCallback(this);
 	}
@@ -65,7 +65,7 @@ public class SurfacePanel extends SurfaceView implements SurfaceHolder.Callback 
 	
 	@Override
 	public boolean onTouchEvent(MotionEvent e) {
-		touch.clicking = true;
+		touch.clicking = true; // for synchronization
 		touchCounter++;
 		
 		if(e.getAction() == MotionEvent.ACTION_UP)

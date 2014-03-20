@@ -9,7 +9,7 @@ public class Touch {
 		x = 0;
 		y = 0;
 		counter = 0;
-		bounce = 40.0f;
+		bounce = 15.0f;
 		clicking = false;
 	}
 	

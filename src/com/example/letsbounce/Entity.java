@@ -31,7 +31,7 @@ public class Entity {
 	
 	public void process() {
 		if(game.touch.counter > 0) {
-			if(game.touch.click()) {
+			if(game.touch.click()) {		
 				if(game.touch.isTouching(this))
 					touch();
 			}

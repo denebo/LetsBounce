@@ -10,7 +10,7 @@ public class LetsBounce {
 	int SCREEN_WIDTH, SCREEN_HEIGHT;
 	Context context;
 	Touch touch;
-	float gravity, density;
+	float gravity, mYCap, density;
 	
 	ArrayList<Entity> entities;
 	
@@ -18,6 +18,7 @@ public class LetsBounce {
 		this.context = context;
 		this.touch = touch;
 		this.gravity = gravity;
+		mYCap = 5.0f;
 		density = context.getResources().getDisplayMetrics().density;
 		entities = new ArrayList<Entity>();
 		SCREEN_WIDTH = context.getResources().getDisplayMetrics().widthPixels;
@@ -32,6 +33,6 @@ public class LetsBounce {
 		for(Entity e : entities)
 			e.process();
 		
-		touch.clicking = false;
+		touch.clicking = false; // for synchronization
 	}
 }

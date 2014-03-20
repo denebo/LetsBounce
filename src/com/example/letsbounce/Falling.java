@@ -20,7 +20,9 @@ public class Falling extends Entity {
 	@Override
 	public void process() {
 		super.process();
-		mY += game.gravity;
+		
+		if(mY < game.mYCap)
+			mY += game.gravity;
 		y += mY;
 		x += mX;
 		
@@ -39,7 +41,5 @@ public class Falling extends Entity {
 
 		mX -= fX;
 		mY -= fY;
-		
-		Log.d("ASDF", "TOUCHING");
 	}
 }
