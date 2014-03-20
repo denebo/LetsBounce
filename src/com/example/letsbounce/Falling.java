@@ -5,27 +5,26 @@ import android.util.Log;
 
 public class Falling extends Entity {
 	int health;
-	float gravity, mX, mY;
+	float gravity, mX, mY, bounce;
 	
-	public Falling(float x, float y, float width, float height, float gravity, Bitmap bmap) {
-		super(x, y, width, height, bmap);
+	public Falling(LetsBounce game, float x, float y, float width, float height, float gravity, float bounce, Bitmap bmap) {
+		super(game, x, y, width, height, bmap);
 		this.gravity = gravity;
+		this.bounce = bounce;
 		health = 3;
 	}
-
-	public void setGravity(float gravity) { this.gravity = gravity; }
-	public float getGravity() { return this.gravity; }
 	
 	@Override
 	public void process() {
-		mY += gravity;
-		//y += mY;
-		
+		mY += game.gravity;
+		y += mY;
 	}
 	
 	@Override
-	public void touch(Touch touch) {
-		Log.d("ASDF", "TOUCHED ME");
-		mY = -mY;
+	public void touch() {
+		if(mY > 0)
+			mY *= -game.touch.bounce;
+		else
+			mY *= game.touch.bounce;
 	}
 }

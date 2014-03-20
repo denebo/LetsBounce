@@ -1,7 +1,7 @@
 package com.example.letsbounce;
 
 public class Touch {
-	float x, y;
+	float x, y, bounce;
 	int counter;
 	boolean clicking; // used for synchronization between UI thread and Game thread
 	
@@ -9,6 +9,7 @@ public class Touch {
 		x = 0;
 		y = 0;
 		counter = 0;
+		bounce = 1.0f;
 		clicking = false;
 	}
 	

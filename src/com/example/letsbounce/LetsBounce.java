@@ -9,14 +9,17 @@ import android.util.Log;
 public class LetsBounce {
 	Context context;
 	Touch touch;
+	float gravity, density;
 	
 	ArrayList<Entity> entities;
 	
-	public LetsBounce(Context context, Touch touch) {
+	public LetsBounce(Context context, Touch touch, float gravity, float density) {
 		this.context = context;
 		this.touch = touch;
+		this.gravity = gravity;
+		this.density = density;
 		entities = new ArrayList<Entity>();
-		entities.add(new Falling(50, 50, 64, 64, 0.1f, BitmapFactory.decodeResource(context.getResources(), R.drawable.red)));
+		entities.add(new Falling(this, 50 * density, 50 * density, 64 * density, 64 * density, 0, 0, BitmapFactory.decodeResource(context.getResources(), R.drawable.red)));
 	}
 	
 	public void process() {
@@ -25,7 +28,7 @@ public class LetsBounce {
 				if(touch.click()) {
 					Log.d("ASDF", touch.x + ", " + touch.y);
 					if(touch.isTouching(e))
-						e.touch(touch);
+						e.touch();
 				}
 			}
 			e.process();
