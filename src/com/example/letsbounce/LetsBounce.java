@@ -7,31 +7,26 @@ import android.graphics.BitmapFactory;
 import android.util.Log;
 
 public class LetsBounce {
+	int SCREEN_WIDTH, SCREEN_HEIGHT;
 	Context context;
 	Touch touch;
 	float gravity, density;
 	
 	ArrayList<Entity> entities;
 	
-	public LetsBounce(Context context, Touch touch, float gravity, float density) {
+	public LetsBounce(Context context, Touch touch, float gravity) {
 		this.context = context;
 		this.touch = touch;
 		this.gravity = gravity;
-		this.density = density;
+		density = context.getResources().getDisplayMetrics().density;
 		entities = new ArrayList<Entity>();
-		entities.add(new Falling(this, 50 * density, 50 * density, 64 * density, 64 * density, 0, 0, BitmapFactory.decodeResource(context.getResources(), R.drawable.red)));
+		entities.add(new Falling(this, 50, 50, 64, 64, 0, 0, BitmapFactory.decodeResource(context.getResources(), R.drawable.red)));
+		SCREEN_WIDTH = context.getResources().getDisplayMetrics().widthPixels;
+		SCREEN_HEIGHT = context.getResources().getDisplayMetrics().heightPixels;
 	}
 	
 	public void process() {
-		for(Entity e : entities) {
-			if(touch.counter > 0) {
-				if(touch.click()) {
-					Log.d("ASDF", touch.x + ", " + touch.y);
-					if(touch.isTouching(e))
-						e.touch();
-				}
-			}
+		for(Entity e : entities)
 			e.process();
-		}
 	}
 }
