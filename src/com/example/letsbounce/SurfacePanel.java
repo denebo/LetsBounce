@@ -58,7 +58,9 @@ public class SurfacePanel extends SurfaceView implements SurfaceHolder.Callback 
 	
 	void doDraw(Canvas canvas) {
 		canvas.drawColor(Color.CYAN);
-		canvas.drawBitmap(mGame.ball.getBitmap(), mGame.ball.getX(), mGame.ball.getY(), null);
+		for(Entity e : mGame.entities){
+			if(e.bmap != null) canvas.drawBitmap(e.bmap, e.x, e.y, null);
+		}
 	}
 	
 	@Override
@@ -70,8 +72,8 @@ public class SurfacePanel extends SurfaceView implements SurfaceHolder.Callback 
 			touchCounter = 0;
 		
 		touch.counter = touchCounter;
-		touch.x = e.getX();
-		touch.y = e.getY();
+		touch.x = e.getRawX();
+		touch.y = e.getRawY();
 		
 	    return true;
 	}

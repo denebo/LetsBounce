@@ -1,6 +1,7 @@
 package com.example.letsbounce;
 
 import android.graphics.Bitmap;
+import android.util.Log;
 
 public class Falling extends Entity {
 	int health;
@@ -18,13 +19,13 @@ public class Falling extends Entity {
 	@Override
 	public void process() {
 		mY += gravity;
-		setY(getY() + mY);
+		//y += mY;
 		
 	}
 	
-	public void touch() {
-		
+	@Override
+	public void touch(Touch touch) {
+		Log.d("ASDF", "TOUCHED ME");
+		mY = -mY;
 	}
-	
-
 }

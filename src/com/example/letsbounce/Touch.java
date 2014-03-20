@@ -19,4 +19,10 @@ public class Touch {
 		}
 		return false;
 	}
+	
+	public boolean isTouching(Entity entity) {
+		if(x > entity.x && x < entity.x + entity.width && y > entity.y && y < entity.y + entity.height)
+			return true;
+		return false;
+	}
 }
