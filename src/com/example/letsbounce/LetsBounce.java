@@ -18,7 +18,7 @@ public class LetsBounce {
 		this.context = context;
 		this.touch = touch;
 		this.gravity = gravity;
-		mYCap = 5.0f;
+		mYCap = 25.0f;
 		density = context.getResources().getDisplayMetrics().density;
 		entities = new ArrayList<Entity>();
 		SCREEN_WIDTH = context.getResources().getDisplayMetrics().widthPixels;
