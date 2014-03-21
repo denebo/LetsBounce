@@ -23,11 +23,20 @@ public class Falling extends Entity {
 		
 		if(mY < game.mYCap)
 			mY += game.gravity;
+		if (mX > game.mXCap)
+			mX = game.mXCap;
 		y += mY;
 		x += mX;
 		
-		if(x + width > game.SCREEN_WIDTH || x < 0)
+		if(x + width > game.SCREEN_WIDTH) {
+			x = game.SCREEN_WIDTH - width;
 			mX = -mX;
+		}
+		
+		if(x < 0) {
+			x = 0;
+			mX = -mX;
+		}
 	}
 	
 	@Override
@@ -39,7 +48,7 @@ public class Falling extends Entity {
 		float fX = (float)Math.cos(angle) * game.touch.bounce;
 		float fY = (float)Math.abs(Math.sin(angle)) * game.touch.bounce;
 
-		mX -= fX;
+		mX -= -5;
 		mY -= fY;
 	}
 }

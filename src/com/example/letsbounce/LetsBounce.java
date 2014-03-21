@@ -10,7 +10,7 @@ public class LetsBounce {
 	int SCREEN_WIDTH, SCREEN_HEIGHT;
 	Context context;
 	Touch touch;
-	float gravity, mYCap, density;
+	float gravity, mXCap, mYCap, density;
 	
 	ArrayList<Entity> entities;
 	
@@ -19,13 +19,14 @@ public class LetsBounce {
 		this.touch = touch;
 		this.gravity = gravity;
 		mYCap = 25.0f;
+		mXCap = 15.0f;
 		density = context.getResources().getDisplayMetrics().density;
 		entities = new ArrayList<Entity>();
 		SCREEN_WIDTH = context.getResources().getDisplayMetrics().widthPixels;
 		SCREEN_HEIGHT = context.getResources().getDisplayMetrics().heightPixels;
 		
 		// adding falling objects
-		entities.add(new Falling(this, 50, 50, 64, 64, 0, 0, BitmapFactory.decodeResource(context.getResources(), R.drawable.red)));
+		entities.add(new Falling(this, 1000, 50, 64, 64, 0, 0, BitmapFactory.decodeResource(context.getResources(), R.drawable.red)));
 		entities.add(new Falling(this, 200, 50, 64, 64, 0, 0, BitmapFactory.decodeResource(context.getResources(), R.drawable.red)));
 	}
 	
