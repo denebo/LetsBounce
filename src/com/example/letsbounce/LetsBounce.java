@@ -44,8 +44,8 @@ public class LetsBounce {
 			for (int j = i; j < entities.size(); j++) {
 				Falling ec = (Falling)entities.get(j);
 				if(e != ec) {
-					float dX = e.x - ec.x;
-					float dY = e.y - ec.y;
+					float dX = e.getCenterX() - ec.getCenterX();
+					float dY = e.getCenterY() - ec.getCenterY();
 					double hyp = Math.sqrt(dX * dX + dY * dY);
 					
 					if(Math.abs(hyp) < e.width / 2 + ec.width / 2) {
