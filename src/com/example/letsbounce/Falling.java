@@ -14,20 +14,31 @@ public class Falling extends Entity {
 		health = 3;
 	}
 	
-	public float getCenterX() { return x + width / 2; }
-	public float getCenterY() { return y + height / 2; }
-	
 	@Override
 	public void process() {
 		super.process();
 		
-		if(mY < game.mYCap)
-			mY += game.gravity;
+		mY += game.gravity;
+		
+		if(mY > game.mYCap)
+			mY = game.mYCap;
+		else if(mY < -game.mYCap - game.mYPad) // mYPad allows ball to go slightly faster up
+			mY = -game.mYCap;
+		if(mX > game.mXCap)
+			mX = game.mXCap;
+
 		y += mY;
 		x += mX;
 		
-		if(x + width > game.SCREEN_WIDTH || x < 0)
+		if(x < 0) {
 			mX = -mX;
+			x = 0;
+		}
+		
+		if(x + width > game.SCREEN_WIDTH) {
+			mX = -mX;
+			x = game.SCREEN_WIDTH - width;
+		}
 	}
 	
 	@Override
