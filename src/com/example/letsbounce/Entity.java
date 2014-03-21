@@ -24,6 +24,9 @@ public class Entity {
 		this.game = game;
 	}
 	
+	public float getCenterX() { return x + width / 2; }
+	public float getCenterY() { return y + height / 2; }
+	
 	public void touch() {
 		
 	}

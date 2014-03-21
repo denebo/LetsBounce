@@ -14,9 +14,6 @@ public class Falling extends Entity {
 		health = 3;
 	}
 	
-	public float getCenterX() { return x + width / 2; }
-	public float getCenterY() { return y + height / 2; }
-	
 	@Override
 	public void process() {
 		super.process();

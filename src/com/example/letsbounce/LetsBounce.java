@@ -26,14 +26,24 @@ public class LetsBounce {
 		SCREEN_HEIGHT = context.getResources().getDisplayMetrics().heightPixels;
 		
 		// adding falling objects
-		entities.add(new Falling(this, 1000, 50, 64, 64, 0, 0, BitmapFactory.decodeResource(context.getResources(), R.drawable.red)));
+		entities.add(new Falling(this, 50, 50, 64, 64, 0, 0, BitmapFactory.decodeResource(context.getResources(), R.drawable.red)));
 		entities.add(new Falling(this, 200, 50, 64, 64, 0, 0, BitmapFactory.decodeResource(context.getResources(), R.drawable.red)));
 	}
 	
 	public void process() {
 		for(Entity e : entities)
 			e.process();
-		
+		for(Entity e : entities) {
+			for (Entity ce : entities) {
+				float dX = e.getCenterX() - ce.getCenterX();
+				float dY = e.getCenterY() - ce.getCenterY();
+				float hyp = (float) Math.sqrt(dX * dX + dY * dY);
+				
+				if(hyp < e.width)
+					Log.d("ASDF", "THEY'RE TOUCHING! " + hyp);
+				
+			}
+		}
 		touch.clicking = false; // for synchronization
 	}
 }
