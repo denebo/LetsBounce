@@ -21,7 +21,7 @@ public class SurfacePanel extends SurfaceView implements SurfaceHolder.Callback 
 		context = ctxt;	
 		touch = new Touch();
 		touchCounter = 0;
-		mGame = new LetsBounce(ctxt, touch, 0.2f);
+		mGame = new LetsBounce(ctxt, touch, 0.1f);
 		SurfaceHolder holder = getHolder();
 		holder.addCallback(this);
 	}
