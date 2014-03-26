@@ -1,0 +1,48 @@
+1.
+Marty Eischeid  - mae2264
+Deneb Garza		- dwg548
+Faseeh Akhter 	- fa4295
+
+
+2.
+How to use our app: Tap the balls as they fall to send them flying upward -- tapping at different locations will launch them in
+                    different direction! Don't let them fall off the bottom of the screen! (For now, if all four balls fall,
+                    you will need to restart the app or change the orientation to bring them back.)
+                    
+3.                    
+Features:           Physics (created from scratch):
+                    - Gravity
+                    - Vertical and horizontal acceleration caps (to make game more playable)
+                    - Collision detection 
+                    - Rotational bouncing (by touch and collision)
+                    - Wall constraints (ball bounces off left and right sides of screen)
+
+4.
+Future features:	- Main menu
+						- Level selection
+						- Settings
+							- Sound (on/off)
+							- Customizable physics
+					- Game over screen
+					- Save high score and display current score during game
+					- Different objects with different attributes than balls
+					- Power ups (slow motion, more lives, lower gravity)
+					- Object health - After X number of taps, objects are destroyed
+
+
+5.					All implemented features were part of our prototype.  
+
+
+6.                  N/A
+
+
+7.					- Entity.java
+					- FObject.java
+					- LetsBounce.java
+					- LetsBounceActivity.java
+					- MainThread.java
+					- SurfacePanel.java
+					- Touch.java
+					
+					No third party code or libraries were used.
+             

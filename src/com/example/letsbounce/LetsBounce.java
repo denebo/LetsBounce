@@ -27,10 +27,10 @@ public class LetsBounce {
 		SCREEN_HEIGHT = context.getResources().getDisplayMetrics().heightPixels;
 		
 		// adding falling objects
-		entities.add(new Falling(this, 50, 0, 64, 64, 0, 0, BitmapFactory.decodeResource(context.getResources(), R.drawable.red)));
-		entities.add(new Falling(this, 50, 0, 64, 64, 0, 0, BitmapFactory.decodeResource(context.getResources(), R.drawable.red)));
-		entities.add(new Falling(this, 50, 0, 64, 64, 0, 0, BitmapFactory.decodeResource(context.getResources(), R.drawable.red)));
-		entities.add(new Falling(this, 50, 100, 96, 96, 0, 0, BitmapFactory.decodeResource(context.getResources(), R.drawable.green)));
+		entities.add(new FObject(this, 50, 0, 64, 64, 0, 0, BitmapFactory.decodeResource(context.getResources(), R.drawable.red)));
+		entities.add(new FObject(this, 50, 0, 64, 64, 0, 0, BitmapFactory.decodeResource(context.getResources(), R.drawable.red)));
+		entities.add(new FObject(this, 50, 0, 64, 64, 0, 0, BitmapFactory.decodeResource(context.getResources(), R.drawable.red)));
+		entities.add(new FObject(this, 50, 100, 96, 96, 0, 0, BitmapFactory.decodeResource(context.getResources(), R.drawable.green)));
 	}
 	
 	public void process() {
@@ -40,9 +40,9 @@ public class LetsBounce {
 		// check for collisions between falling objects and make them bounce
 		// at respective angles
 		for(int i = 0; i < entities.size(); i++) {
-			Falling e = (Falling)entities.get(i);
+			FObject e = (FObject)entities.get(i);
 			for (int j = i; j < entities.size(); j++) {
-				Falling ec = (Falling)entities.get(j);
+				FObject ec = (FObject)entities.get(j);
 				if(e != ec) {
 					float dX = e.getCenterX() - ec.getCenterX();
 					float dY = e.getCenterY() - ec.getCenterY();
