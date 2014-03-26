@@ -28,9 +28,9 @@ public class LetsBounce {
 		
 		// adding falling objects
 		entities.add(new Falling(this, 50, 0, 64, 64, 0, 0, BitmapFactory.decodeResource(context.getResources(), R.drawable.red)));
-		entities.add(new Falling(this, 200, 0, 64, 64, 0, 0, BitmapFactory.decodeResource(context.getResources(), R.drawable.red)));
-		entities.add(new Falling(this, 300, 0, 64, 64, 0, 0, BitmapFactory.decodeResource(context.getResources(), R.drawable.red)));
-		entities.add(new Falling(this, 200, 100, 96, 96, 0, 0, BitmapFactory.decodeResource(context.getResources(), R.drawable.green)));
+		entities.add(new Falling(this, 50, 0, 64, 64, 0, 0, BitmapFactory.decodeResource(context.getResources(), R.drawable.red)));
+		entities.add(new Falling(this, 50, 0, 64, 64, 0, 0, BitmapFactory.decodeResource(context.getResources(), R.drawable.red)));
+		entities.add(new Falling(this, 50, 100, 96, 96, 0, 0, BitmapFactory.decodeResource(context.getResources(), R.drawable.green)));
 	}
 	
 	public void process() {
