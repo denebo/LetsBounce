@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.graphics.BitmapFactory;
-import android.util.Log;
 
 public class LetsBounce {
 	int SCREEN_WIDTH, SCREEN_HEIGHT;
