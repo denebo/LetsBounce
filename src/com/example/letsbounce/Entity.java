@@ -6,23 +6,23 @@ import android.util.Log;
 public class Entity {
 	float x, y, width, height;
 	Bitmap bmap;
-	LetsBounce game;
+	Scene scene;
 	
-	public Entity(LetsBounce game, float x, float y, float width, float height) {
-		this.x = x * game.density;
-		this.y = y * game.density;
-		this.width = width * game.density;
-		this.height = height * game.density;
-		this.game = game;
+	public Entity(Scene scene, float x, float y, float width, float height) {
+		this.scene = scene;
+		this.x = x * scene.game.density;
+		this.y = y * scene.game.density;
+		this.width = width * scene.game.density;
+		this.height = height * scene.game.density;
 	}
 
-	public Entity(LetsBounce game, float x, float y,  float width, float height, Bitmap bmap) {
-		this.x = x * game.density;
-		this.y = y * game.density;
-		this.width = width * game.density;
-		this.height = height * game.density;
+	public Entity(Scene scene, float x, float y,  float width, float height, Bitmap bmap) {
+		this.scene = scene;
+		this.x = x * scene.game.density;
+		this.y = y * scene.game.density;
+		this.width = width * scene.game.density;
+		this.height = height * scene.game.density;
 		this.bmap = bmap;
-		this.game = game;
 	}
 	
 	public float getCenterX() { return x + width / 2; }
@@ -33,9 +33,9 @@ public class Entity {
 	}
 	
 	public void process() {
-		if(game.touch.counter > 0) {
-			if(game.touch.click()) {		
-				if(game.touch.isTouching(this))
+		if(scene.game.touch.counter > 0) {
+			if(scene.game.touch.click()) {		
+				if(scene.game.touch.isTouching(this))
 					touch();
 			}
 		}

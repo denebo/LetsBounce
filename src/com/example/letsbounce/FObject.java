@@ -4,28 +4,30 @@ import android.graphics.Bitmap;
 import android.util.Log;
 
 public class FObject extends Entity {
+	GameScene scene;
 	int health;
 	float gravity, mX, mY, bounce;
 	
-	public FObject(LetsBounce game, float x, float y, float width, float height, float gravity, float bounce, Bitmap bmap) {
-		super(game, x, y, width, height, bmap);
+	public FObject(GameScene scene, float x, float y, float width, float height, float gravity, float bounce, Bitmap bmap) {
+		super(scene, x, y, width, height, bmap);
 		this.gravity = gravity;
 		this.bounce = bounce;
 		health = 3;
+		this.scene = scene;
 	}
 	
 	@Override
 	public void process() {
 		super.process();
 		
-		mY += game.gravity;
+		mY += scene.gravity;
 		
-		if(mY > game.mYCap)
-			mY = game.mYCap;
-		else if(mY < -game.mYCap - game.mYPad) // mYPad allows ball to go slightly faster up
-			mY = -game.mYCap;
-		if(mX > game.mXCap)
-			mX = game.mXCap;
+		if(mY > scene.mYCap)
+			mY = scene.mYCap;
+		else if(mY < -scene.mYCap - scene.mYPad)
+			mY = -scene.mYCap;
+		if(mX > scene.mXCap)
+			mX = scene.mXCap;
 
 		y += mY;
 		x += mX;
@@ -35,20 +37,20 @@ public class FObject extends Entity {
 			x = 0;
 		}
 		
-		if(x + width > game.SCREEN_WIDTH) {
+		if(x + width > scene.game.SCREEN_WIDTH) {
 			mX = -mX;
-			x = game.SCREEN_WIDTH - width;
+			x = scene.game.SCREEN_WIDTH - width;
 		}
 	}
 	
 	@Override
 	public void touch() {		
-		float dX = game.touch.x - getCenterX(); // we need to move left and right, so no abs() for dX
-		float dY = Math.abs(game.touch.y - y);
+		float dX = scene.game.touch.x - getCenterX(); // we need to move left and right, so no abs() for dX
+		float dY = Math.abs(scene.game.touch.y - y);
 		
 		double angle = Math.atan2(dY, dX);
-		float fX = (float)Math.cos(angle) * game.touch.bounce;
-		float fY = (float)Math.abs(Math.sin(angle)) * game.touch.bounce;
+		float fX = (float)Math.cos(angle) * scene.game.touch.bounce;
+		float fY = (float)Math.abs(Math.sin(angle)) * scene.game.touch.bounce;
 
 		mX -= fX;
 		mY -= fY;
