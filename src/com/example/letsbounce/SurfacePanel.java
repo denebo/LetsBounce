@@ -1,5 +1,4 @@
 package com.example.letsbounce;
-
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -21,7 +20,7 @@ public class SurfacePanel extends SurfaceView implements SurfaceHolder.Callback 
 		context = ctxt;	
 		touch = new Touch();
 		touchCounter = 0;
-		mGame = new LetsBounce(ctxt, touch, 0.1f);
+		mGame = new LetsBounce(ctxt, touch);
 		SurfaceHolder holder = getHolder();
 		holder.addCallback(this);
 	}
@@ -58,7 +57,7 @@ public class SurfacePanel extends SurfaceView implements SurfaceHolder.Callback 
 	
 	void doDraw(Canvas canvas) {
 		canvas.drawColor(Color.CYAN);
-		for(Entity e : mGame.entities){
+		for(Entity e : mGame.scene.entities){
 			if(e.bmap != null) canvas.drawBitmap(e.bmap, e.x, e.y, null);
 		}
 	}
