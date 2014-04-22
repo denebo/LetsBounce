@@ -3,6 +3,7 @@ package com.example.letsbounce;
 import java.util.ArrayList;
 import android.content.Context;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 
 public class LetsBounce {
 	int SCREEN_WIDTH, SCREEN_HEIGHT;
@@ -12,7 +13,7 @@ public class LetsBounce {
 	
 	ArrayList<Entity> entities;
 	ArrayList<Scene> scenes;
-	Scene scene;
+	Scene activeScene;
 	
 	public LetsBounce(Context context, Touch touch) {
 		this.context = context;
@@ -23,14 +24,17 @@ public class LetsBounce {
 		scenes = new ArrayList<Scene>();
 		
 		Scene mainMenu = new Scene(this);
-		mainMenu.entities.add(new Entity(mainMenu, 100, 200, 200, 100, BitmapFactory.decodeResource(context.getResources(), R.drawable.play)));
+		mainMenu.entities.add(new Button(mainMenu, 100, 200, 200, 100, 
+				BitmapFactory.decodeResource(context.getResources(), R.drawable.play), 
+				new Clickable(mainMenu) { public void action() { scene.game.activeScene = new GameScene(scene.game); } }
+				));
 		
 		scenes.add(0, new GameScene(this));
-		scene = mainMenu;
+		activeScene = mainMenu;
 	}
 	
 	public void process() {
-		scene.process();
+		activeScene.process();
 		touch.clicking = false; // for synchronization
 	}
 }

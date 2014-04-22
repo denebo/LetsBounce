@@ -57,7 +57,7 @@ public class SurfacePanel extends SurfaceView implements SurfaceHolder.Callback 
 	
 	void doDraw(Canvas canvas) {
 		canvas.drawColor(Color.CYAN);
-		for(Entity e : mGame.scene.entities){
+		for(Entity e : mGame.activeScene.entities){
 			if(e.bmap != null) canvas.drawBitmap(e.bmap, e.x, e.y, null);
 		}
 	}
