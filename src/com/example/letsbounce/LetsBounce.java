@@ -22,11 +22,11 @@ public class LetsBounce {
 		SCREEN_HEIGHT = context.getResources().getDisplayMetrics().heightPixels;
 		scenes = new ArrayList<Scene>();
 		
-		Scene testScene = new Scene(this);
-		testScene.entities.add(new Entity(testScene, 50, 0, 64, 64, BitmapFactory.decodeResource(context.getResources(), R.drawable.red)));
+		Scene mainMenu = new Scene(this);
+		mainMenu.entities.add(new Entity(mainMenu, 100, 200, 200, 100, BitmapFactory.decodeResource(context.getResources(), R.drawable.play)));
 		
 		scenes.add(0, new GameScene(this));
-		scene = testScene;
+		scene = mainMenu;
 	}
 	
 	public void process() {
