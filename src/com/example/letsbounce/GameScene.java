@@ -16,10 +16,10 @@ public class GameScene extends Scene {
 		score = 0;
 		
 		// adding falling objects
-		entities.add(new FObject(this, 50, 0, 64, 64, 0, 0, BitmapFactory.decodeResource(game.context.getResources(), R.drawable.red)));
-		entities.add(new FObject(this, 50, 0, 64, 64, 0, 0, BitmapFactory.decodeResource(game.context.getResources(), R.drawable.red)));
-		entities.add(new FObject(this, 50, 0, 64, 64, 0, 0, BitmapFactory.decodeResource(game.context.getResources(), R.drawable.red)));
-		entities.add(new FObject(this, 50, 100, 96, 96, 0, 0, BitmapFactory.decodeResource(game.context.getResources(), R.drawable.green)));
+		entities.add(new FObject(this, 50, 0, 64, 64, 0, 15.0f, BitmapFactory.decodeResource(game.context.getResources(), R.drawable.red)));
+		entities.add(new FObject(this, 50, 0, 64, 64, 0, 15.0f, BitmapFactory.decodeResource(game.context.getResources(), R.drawable.red)));
+		entities.add(new FObject(this, 50, 0, 64, 64, 0, 15.0f, BitmapFactory.decodeResource(game.context.getResources(), R.drawable.red)));
+		entities.add(new FObject(this, 50, 100, 96, 96, 0, 15.0f, BitmapFactory.decodeResource(game.context.getResources(), R.drawable.green)));
 	}
 	
 	public void process() {
@@ -37,8 +37,8 @@ public class GameScene extends Scene {
 					
 					if(Math.abs(hyp) < e.width / 2 + ec.width / 2) {
 						double angle = Math.atan2(dY, dX);
-						float fX = (float)Math.cos(angle) * game.touch.bounce;
-						float fY = (float)Math.sin(angle) * game.touch.bounce;
+						float fX = (float)Math.cos(angle) * ((e.bounce / 2 + ec.bounce / 2) / 2);
+						float fY = (float)Math.sin(angle) * ((e.bounce / 2 + ec.bounce / 2) / 2);
 	
 						e.mX += fX;
 						e.mY += fY;
