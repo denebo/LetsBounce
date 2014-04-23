@@ -12,7 +12,6 @@ public class FObject extends Entity {
 		super(scene, x, y, width, height, bmap);
 		this.gravity = gravity;
 		this.bounce = bounce;
-		health = 3;
 		this.scene = scene;
 	}
 	
@@ -54,5 +53,8 @@ public class FObject extends Entity {
 
 		mX -= fX;
 		mY -= fY;
+		
+		// update score
+		scene.score += 1;
 	}
 }

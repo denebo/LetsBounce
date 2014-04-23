@@ -21,10 +21,11 @@ public class LetsBounce {
 		density = context.getResources().getDisplayMetrics().density;
 		SCREEN_WIDTH = context.getResources().getDisplayMetrics().widthPixels;
 		SCREEN_HEIGHT = context.getResources().getDisplayMetrics().heightPixels;
+		Log.d("ASDF", density + "");
 		scenes = new ArrayList<Scene>();
 		
 		Scene mainMenu = new Scene(this);
-		mainMenu.entities.add(new Button(mainMenu, 100, 200, 200, 100, 
+		mainMenu.entities.add(new Button(mainMenu, (200) / density, (10) / density, 200, 100, 
 				BitmapFactory.decodeResource(context.getResources(), R.drawable.play), 
 				new Clickable(mainMenu) { public void action() { scene.game.activeScene = new GameScene(scene.game); } }
 				));
