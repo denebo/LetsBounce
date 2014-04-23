@@ -19,30 +19,33 @@ public class FObject extends Entity {
 	public void process() {
 		super.process();
 		
-		mY += scene.gravity + scene.score / 100.0f;
+		mY += scene.gravity;
 		
 //		if(mY > scene.mYCap)
 //			mY = scene.mYCap;
 //		else if(mY < -scene.mYCap - scene.mYPad)
 //			mY = -scene.mYCap;
+		
 		if(mX > scene.mXCap)
 			mX = scene.mXCap;
-
-		y += mY;
-		x += mX;
 		
+		// ceiling
+		if(y < 0) mY = -mY;
+		
+		// left wall
 		if(x < 0) {
 			mX = -mX;
 			x = 0;
 		}
 		
+		// right wall
 		if(x + width > scene.game.SCREEN_WIDTH) {
 			mX = -mX;
 			x = scene.game.SCREEN_WIDTH - width;
 		}
 		
-		if(y < 0)
-			mY = -mY;
+		y += mY;
+		x += mX;
 	}
 	
 	@Override
