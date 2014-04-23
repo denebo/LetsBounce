@@ -19,12 +19,12 @@ public class FObject extends Entity {
 	public void process() {
 		super.process();
 		
-		mY += scene.gravity;
+		mY += scene.gravity + scene.score / 100.0f;
 		
-		if(mY > scene.mYCap)
-			mY = scene.mYCap;
-		else if(mY < -scene.mYCap - scene.mYPad)
-			mY = -scene.mYCap;
+//		if(mY > scene.mYCap)
+//			mY = scene.mYCap;
+//		else if(mY < -scene.mYCap - scene.mYPad)
+//			mY = -scene.mYCap;
 		if(mX > scene.mXCap)
 			mX = scene.mXCap;
 
@@ -40,6 +40,9 @@ public class FObject extends Entity {
 			mX = -mX;
 			x = scene.game.SCREEN_WIDTH - width;
 		}
+		
+		if(y < 0)
+			mY = -mY;
 	}
 	
 	@Override
@@ -52,7 +55,7 @@ public class FObject extends Entity {
 		float fY = (float)Math.abs(Math.sin(angle)) * scene.game.touch.bounce;
 
 		mX -= fX;
-		mY -= fY;
+		mY -= fY + scene.score;
 		
 		// update score
 		scene.score += 1;
