@@ -61,6 +61,6 @@ public class FObject extends Entity {
 		mX -= fX;
 		mY -= fY;
 		
-		touched++;
+		touched += 1;
 	}
 }

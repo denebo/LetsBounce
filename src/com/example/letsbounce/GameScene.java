@@ -29,6 +29,7 @@ public class GameScene extends Scene {
 	
 	public void process() {
 		super.process();
+		score = 0;
 		// check for collisions between falling objects and make them bounce
 		// at respective angles
 		for(int i = 0; i < entities.size(); i++) {
@@ -60,7 +61,6 @@ public class GameScene extends Scene {
 				score += e.touched;
 			}
 			scoreLabel.label = "Score: " + score;
-			score = 0;
 		}
 	}
 }
