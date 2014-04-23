@@ -11,7 +11,6 @@ public class LetsBounce {
 	Touch touch;
 	float density;
 	
-	ArrayList<Entity> entities;
 	ArrayList<Scene> scenes;
 	Scene activeScene;
 	
@@ -21,7 +20,6 @@ public class LetsBounce {
 		density = context.getResources().getDisplayMetrics().density;
 		SCREEN_WIDTH = context.getResources().getDisplayMetrics().widthPixels;
 		SCREEN_HEIGHT = context.getResources().getDisplayMetrics().heightPixels;
-		Log.d("ASDF", density + "");
 		scenes = new ArrayList<Scene>();
 		
 		Scene mainMenu = new Scene(this);
