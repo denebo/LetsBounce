@@ -8,6 +8,11 @@ public class Scene {
 	public Scene(LetsBounce game) {
 		entities = new ArrayList<Entity>();
 		this.game = game;
+		initialize();
+	}
+	
+	public void initialize() {
+		
 	}
 	
 	public void process() {

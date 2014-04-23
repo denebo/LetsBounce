@@ -14,6 +14,7 @@ public class Entity {
 		this.y = y * scene.game.density;
 		this.width = width * scene.game.density;
 		this.height = height * scene.game.density;
+		bmap = null;
 	}
 
 	public Entity(Scene scene, float x, float y,  float width, float height, Bitmap bmap) {

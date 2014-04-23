@@ -5,7 +5,7 @@ import android.util.Log;
 
 public class FObject extends Entity {
 	GameScene scene;
-	int health;
+	int touched;
 	float gravity, mX, mY, bounce;
 	
 	public FObject(GameScene scene, float x, float y, float width, float height, float gravity, float bounce, Bitmap bmap) {
@@ -13,6 +13,7 @@ public class FObject extends Entity {
 		this.gravity = gravity;
 		this.bounce = bounce;
 		this.scene = scene;
+		touched = 0;
 	}
 	
 	@Override
@@ -60,7 +61,6 @@ public class FObject extends Entity {
 		mX -= fX;
 		mY -= fY;
 		
-		// update score
-		scene.score += 1;
+		touched++;
 	}
 }

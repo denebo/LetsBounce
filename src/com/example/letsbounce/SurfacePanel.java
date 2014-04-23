@@ -59,15 +59,15 @@ public class SurfacePanel extends SurfaceView implements SurfaceHolder.Callback 
 	void doDraw(Canvas canvas) {
 		canvas.drawColor(Color.CYAN);
 		Paint paint = new Paint();
-		paint.setTextSize(100.0f);
-		paint.setARGB(255, 0, 0, 0);
-		if(mGame.activeScene instanceof GameScene) {
-			GameScene gameScene = (GameScene)mGame.activeScene;
-			canvas.drawText("Score: " + gameScene.score, 300, 100, paint);
-		}
 		
 		for(Entity e : mGame.activeScene.entities){
 			if(e.bmap != null) canvas.drawBitmap(e.bmap, e.x, e.y, null);
+			if(e instanceof Label) {
+				Label label = (Label)e;
+				paint.setARGB(255, label.r, label.g, label.b);
+				paint.setTextSize(label.size);
+				canvas.drawText(label.label, label.x, label.y, paint);
+			}
 		}
 	}
 	
