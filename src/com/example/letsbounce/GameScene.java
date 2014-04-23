@@ -4,6 +4,7 @@ import android.graphics.BitmapFactory;
 
 public class GameScene extends Scene {
 	public float gravity, mYCap, mYPad, mXCap;
+	public int score;
 	
 	public GameScene(LetsBounce game) {
 		super(game);
@@ -11,6 +12,8 @@ public class GameScene extends Scene {
 		mYCap = 15.0f;
 		mYPad = 5.0f;
 		mXCap = 8.0f;
+		
+		score = 0;
 		
 		// adding falling objects
 		entities.add(new FObject(this, 50, 0, 64, 64, 0, 0, BitmapFactory.decodeResource(game.context.getResources(), R.drawable.red)));

@@ -2,6 +2,7 @@ package com.example.letsbounce;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -57,6 +58,14 @@ public class SurfacePanel extends SurfaceView implements SurfaceHolder.Callback 
 	
 	void doDraw(Canvas canvas) {
 		canvas.drawColor(Color.CYAN);
+		Paint paint = new Paint();
+		paint.setTextSize(100.0f);
+		paint.setARGB(255, 0, 0, 0);
+		if(mGame.activeScene instanceof GameScene) {
+			GameScene gameScene = (GameScene)mGame.activeScene;
+			canvas.drawText("Score: " + gameScene.score, 300, 100, paint);
+		}
+		
 		for(Entity e : mGame.activeScene.entities){
 			if(e.bmap != null) canvas.drawBitmap(e.bmap, e.x, e.y, null);
 		}
