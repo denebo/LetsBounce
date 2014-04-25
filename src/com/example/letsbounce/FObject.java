@@ -53,7 +53,8 @@ public class FObject extends Entity {
 	}
 	
 	@Override
-	public void touch() {		
+	public void touch() {
+		scene.touched(this);
 		float dX = scene.game.touch.x - getCenterX(); // we need to move left and right, so no abs() for dX
 		float dY = Math.abs(scene.game.touch.y - y);
 		

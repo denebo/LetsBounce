@@ -12,11 +12,15 @@ public class Scene {
 	}
 	
 	public void initialize() {
-		
+		// Initialize individual scene specific components
 	}
 	
 	public void process() {
 		for(Entity e : entities)
 			e.process();
+	}
+	
+	public void touched(Entity e) {
+		// Entity e was touched
 	}
 }

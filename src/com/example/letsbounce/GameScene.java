@@ -19,16 +19,13 @@ public class GameScene extends Scene {
 	@Override
 	public void initialize() {
 		entities.add(new FObject(this, 50, 100, 96, 96, 0, 15.0f, BitmapFactory.decodeResource(game.context.getResources(), R.drawable.green)));
-		entities.add(new FObject(this, 50, 100, 96, 96, 0, 15.0f, BitmapFactory.decodeResource(game.context.getResources(), R.drawable.green)));
-		entities.add(new FObject(this, 50, 100, 96, 96, 0, 15.0f, BitmapFactory.decodeResource(game.context.getResources(), R.drawable.green)));
-		
 		scoreLabel = new Label(this, 100, 100, "Score: 0", 100.0f);
 		entities.add(scoreLabel);
 	}
 	
+	@Override
 	public void process() {
 		super.process();
-		score = 0;
 		// check for collisions between falling objects and make them bounce
 		// at respective angles
 		for(int i = 0; i < entities.size(); i++) {
@@ -57,9 +54,20 @@ public class GameScene extends Scene {
 						}
 					}
 				}
-				score += e.touched;
 			}
 			scoreLabel.label = "Score: " + score;
 		}
+		
+		// remove objects that fall below screen
+		for(int i = 0; i < entities.size(); i++) {
+			Entity e = entities.get(i);
+			if(e.y > game.SCREEN_HEIGHT)
+				entities.remove(i);
+		}
+	}
+	
+	@Override
+	public void touched(Entity e) {
+		score += 1;
 	}
 }
