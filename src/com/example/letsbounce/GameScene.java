@@ -9,7 +9,7 @@ public class GameScene extends Scene {
 	
 	public GameScene(LetsBounce game) {
 		super(game);
-		gravity = 0.2f;
+		gravity = 0.32f;
 		mYCap = 15.0f;
 		mYPad = 5.0f;
 		mXCap = 8.0f;
@@ -18,9 +18,8 @@ public class GameScene extends Scene {
 	
 	@Override
 	public void initialize() {
-		entities.add(new FObject(this, 50, 0, 64, 64, 0, 15.0f, BitmapFactory.decodeResource(game.context.getResources(), R.drawable.red)));
-		entities.add(new FObject(this, 50, 0, 64, 64, 0, 15.0f, BitmapFactory.decodeResource(game.context.getResources(), R.drawable.red)));
-		entities.add(new FObject(this, 50, 0, 64, 64, 0, 15.0f, BitmapFactory.decodeResource(game.context.getResources(), R.drawable.red)));
+		entities.add(new FObject(this, 50, 100, 96, 96, 0, 15.0f, BitmapFactory.decodeResource(game.context.getResources(), R.drawable.green)));
+		entities.add(new FObject(this, 50, 100, 96, 96, 0, 15.0f, BitmapFactory.decodeResource(game.context.getResources(), R.drawable.green)));
 		entities.add(new FObject(this, 50, 100, 96, 96, 0, 15.0f, BitmapFactory.decodeResource(game.context.getResources(), R.drawable.green)));
 		
 		scoreLabel = new Label(this, 100, 100, "Score: 0", 100.0f);

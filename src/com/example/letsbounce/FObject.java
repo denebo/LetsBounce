@@ -31,7 +31,10 @@ public class FObject extends Entity {
 			mX = scene.mXCap;
 		
 		// ceiling
-		if(y < 0) mY = -mY;
+		if(y < 0) {
+			mY = -mY;
+			y = 0;
+		}
 		
 		// left wall
 		if(x < 0) {
