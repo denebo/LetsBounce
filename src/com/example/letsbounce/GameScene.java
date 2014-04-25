@@ -6,6 +6,7 @@ public class GameScene extends Scene {
 	public float gravity, mYCap, mYPad, mXCap;
 	Label scoreLabel;
 	public int score;
+	boolean spawned;
 	
 	public GameScene(LetsBounce game) {
 		super(game);
@@ -14,11 +15,11 @@ public class GameScene extends Scene {
 		mYPad = 5.0f;
 		mXCap = 8.0f;
 		score = 0;
+		spawned = false;
 	}
 	
 	@Override
 	public void initialize() {
-		entities.add(new FObject(this, 50, 100, 96, 96, 0, 15.0f, BitmapFactory.decodeResource(game.context.getResources(), R.drawable.green)));
 		scoreLabel = new Label(this, 100, 100, "Score: 0", 100.0f);
 		entities.add(scoreLabel);
 	}
@@ -64,10 +65,16 @@ public class GameScene extends Scene {
 			if(e.y > game.SCREEN_HEIGHT)
 				entities.remove(i);
 		}
+		
+		if(score % 10 == 0 && !spawned) {
+			spawned = true;
+			entities.add(new FObject(this, 50, -96.0f, 96, 96, 0, 15.0f, BitmapFactory.decodeResource(game.context.getResources(), R.drawable.green)));
+		}
 	}
 	
 	@Override
 	public void touched(Entity e) {
 		score += 1;
+		spawned = false;
 	}
 }
