@@ -64,10 +64,12 @@ public class FObject extends Entity {
 		if(!spawning) {
 			float dX = scene.game.touch.x - getCenterX(); // we need to move left and right, so no abs() for dX
 			float dY = Math.abs(scene.game.touch.y - y);
+			mX = 0;
+			mY = 0;
 			
 			double angle = Math.atan2(dY, dX);
 			float fX = (float)Math.cos(angle) * bounce;
-			float fY = (float)Math.abs(Math.sin(angle)) * bounce + mY; // + mY is for more responsive bouncing on touch
+			float fY = (float)Math.abs(Math.sin(angle)) * bounce; // + mY is for more responsive bouncing on touch
 	
 			mX -= fX;
 			mY -= fY;
