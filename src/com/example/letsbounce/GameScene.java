@@ -6,30 +6,27 @@ public class GameScene extends Scene {
 	public float gravity, mYCap, mYPad, mXCap;
 	Label scoreLabel;
 	public int score;
+	boolean spawned;
 	
 	public GameScene(LetsBounce game) {
 		super(game);
-		gravity = 0.2f;
+		gravity = 0.32f;
 		mYCap = 15.0f;
 		mYPad = 5.0f;
 		mXCap = 8.0f;
 		score = 0;
+		spawned = false;
 	}
 	
 	@Override
 	public void initialize() {
-		entities.add(new FObject(this, 50, 0, 64, 64, 0, 15.0f, BitmapFactory.decodeResource(game.context.getResources(), R.drawable.red)));
-		entities.add(new FObject(this, 50, 0, 64, 64, 0, 15.0f, BitmapFactory.decodeResource(game.context.getResources(), R.drawable.red)));
-		entities.add(new FObject(this, 50, 0, 64, 64, 0, 15.0f, BitmapFactory.decodeResource(game.context.getResources(), R.drawable.red)));
-		entities.add(new FObject(this, 50, 100, 96, 96, 0, 15.0f, BitmapFactory.decodeResource(game.context.getResources(), R.drawable.green)));
-		
 		scoreLabel = new Label(this, 100, 100, "Score: 0", 100.0f);
 		entities.add(scoreLabel);
 	}
 	
+	@Override
 	public void process() {
 		super.process();
-		score = 0;
 		// check for collisions between falling objects and make them bounce
 		// at respective angles
 		for(int i = 0; i < entities.size(); i++) {
@@ -58,9 +55,26 @@ public class GameScene extends Scene {
 						}
 					}
 				}
-				score += e.touched;
 			}
 			scoreLabel.label = "Score: " + score;
 		}
+		
+		// remove objects that fall below screen
+		for(int i = 0; i < entities.size(); i++) {
+			Entity e = entities.get(i);
+			if(e.y > game.SCREEN_HEIGHT)
+				entities.remove(i);
+		}
+		
+		if(score % 10 == 0 && !spawned) {
+			spawned = true;
+			entities.add(new FObject(this, 50, -96.0f, 96, 96, 0, 15.0f, BitmapFactory.decodeResource(game.context.getResources(), R.drawable.green)));
+		}
+	}
+	
+	@Override
+	public void touched(Entity e) {
+		score += 1;
+		spawned = false;
 	}
 }
