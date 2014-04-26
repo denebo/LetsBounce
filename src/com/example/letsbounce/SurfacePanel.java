@@ -1,4 +1,8 @@
 package com.example.letsbounce;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -67,6 +71,10 @@ public class SurfacePanel extends SurfaceView implements SurfaceHolder.Callback 
 				paint.setARGB(255, label.r, label.g, label.b);
 				paint.setTextSize(label.size);
 				canvas.drawText(label.label, label.x, label.y, paint);
+			} else if(e instanceof FDestroyable) {
+				paint.setARGB(255, 255, 255, 255);
+				paint.setTextSize(e.width);
+				canvas.drawText(((FDestroyable) e).health + "", e.x + e.width * 12/60, e.y + e.height * 65/80, paint);
 			}
 		}
 	}

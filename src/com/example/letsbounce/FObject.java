@@ -6,12 +6,11 @@ import android.util.Log;
 public class FObject extends Entity {
 	GameScene scene;
 	int touched;
-	float gravity, mX, mY, bounce;
+	float mX, mY, bounce;
 	boolean spawning;
 	
-	public FObject(GameScene scene, float x, float y, float width, float height, float gravity, float bounce, Bitmap bmap) {
+	public FObject(GameScene scene, float x, float y, float width, float height, float bounce, Bitmap bmap) {
 		super(scene, x, y, width, height, bmap);
-		this.gravity = gravity;
 		this.bounce = bounce;
 		this.scene = scene;
 		touched = 0;
@@ -60,14 +59,16 @@ public class FObject extends Entity {
 	
 	@Override
 	public void touch() {
-		scene.touched(this);
+		scene.touched(this); // tell the scene this entity has been touched
 		if(!spawning) {
 			float dX = scene.game.touch.x - getCenterX(); // we need to move left and right, so no abs() for dX
 			float dY = Math.abs(scene.game.touch.y - y);
+			mX = 0;
+			mY = 0;
 			
 			double angle = Math.atan2(dY, dX);
 			float fX = (float)Math.cos(angle) * bounce;
-			float fY = (float)Math.abs(Math.sin(angle)) * bounce + mY; // + mY is for more responsive bouncing on touch
+			float fY = (float)Math.abs(Math.sin(angle)) * bounce; // + mY is for more responsive bouncing on touch
 	
 			mX -= fX;
 			mY -= fY;
