@@ -1,6 +1,7 @@
 package com.example.letsbounce;
 
 import android.graphics.BitmapFactory;
+import android.util.Log;
 
 public class GameScene extends Scene {
 	public float gravity, mYCap, mYPad, mXCap;
@@ -10,7 +11,7 @@ public class GameScene extends Scene {
 	
 	public GameScene(LetsBounce game) {
 		super(game);
-		gravity = 0.32f;
+		gravity = 1.0f;
 		mYCap = 15.0f;
 		mYPad = 5.0f;
 		mXCap = 8.0f;
@@ -62,19 +63,27 @@ public class GameScene extends Scene {
 		// remove objects that fall below screen
 		for(int i = 0; i < entities.size(); i++) {
 			Entity e = entities.get(i);
-			if(e.y > game.SCREEN_HEIGHT)
+			if(e.y > game.SCREEN_HEIGHT) {
+				if(e instanceof FDestroyable)
+					score -= ((FDestroyable) e).score;
 				entities.remove(i);
+			}
 		}
 		
-		if(score % 10 == 0 && !spawned) {
+		if((score % 5 == 0) && !spawned) {
 			spawned = true;
-			entities.add(new FObject(this, 50, -96.0f, 96, 96, 0, 15.0f, BitmapFactory.decodeResource(game.context.getResources(), R.drawable.green)));
+			entities.add(new FDestroyable(this, 50, -96.0f, 64, 64, 15.0f, BitmapFactory.decodeResource(game.context.getResources(), R.drawable.red), 5, 1));
+			entities.add(new FDestroyable(this, 50, -96.0f, 96, 96, 15.0f, BitmapFactory.decodeResource(game.context.getResources(), R.drawable.green), 5, 1));
 		}
+		
+		Log.d("ASDF", entities.size() + "");
 	}
 	
 	@Override
 	public void touched(Entity e) {
-		score += 1;
 		spawned = false;
+		if(e instanceof FDestroyable) {
+			score += ((FDestroyable) e).score;
+		}
 	}
 }
