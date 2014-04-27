@@ -10,7 +10,7 @@ public class GameScene extends Scene {
 	Label levelLabel, livesLabel;
 	public int score, level, spawnRate;
 	int lvlHealth, lives;
-	boolean spawned;
+	boolean spawned, gameOver;
 	long startTime, elapsedTime;
 	
 	public GameScene(LetsBounce game) {
@@ -36,6 +36,7 @@ public class GameScene extends Scene {
 		livesLabel.b = 50;
 		entities.add(levelLabel);
 		entities.add(livesLabel);
+		gameOver = false;
 	}
 	
 	@Override
@@ -82,31 +83,39 @@ public class GameScene extends Scene {
 			}
 		}
 		
-		// Spawning and levels
-		elapsedTime = System.currentTimeMillis() - startTime;
-		float xSpawn = new Random().nextInt(250);
-		if(elapsedTime > spawnRate * 1000 || entities.size() == 2) {
-			level++;
-			
-			if(level < 15) 
-				lvlHealth = level + 1;
-			if(level <= 6) {
-				spawnRate = 10 - level;
+		if(!gameOver) {
+			// Spawning and levels
+			elapsedTime = System.currentTimeMillis() - startTime;
+			float xSpawn = new Random().nextInt(250);
+			if(elapsedTime > spawnRate * 1000 || entities.size() == 2) {
+				level++;
+				
+				if(level < 15) 
+					lvlHealth = level + 1;
+				if(level <= 6) {
+					spawnRate = 10 - level;
+				}
+				
+				if(level % 5 == 0 && level != 1) {
+					entities.add(new FDestroyable(this, xSpawn, -96.0f, 96, 96, 15.0f, 0.35f, BitmapFactory.decodeResource(game.context.getResources(),
+							R.drawable.green), 3));
+				} else {
+					entities.add(new FDestroyable(this, xSpawn, -64.0f, 64, 64, 15.0f, 0, BitmapFactory.decodeResource(game.context.getResources(),
+							R.drawable.red), lvlHealth));
+				}
+				
+				startTime = System.currentTimeMillis();
 			}
 			
-			if(level % 5 == 0 && level != 1) {
-				entities.add(new FDestroyable(this, xSpawn, -96.0f, 96, 96, 15.0f, 0.35f, BitmapFactory.decodeResource(game.context.getResources(),
-						R.drawable.green), 3));
-			} else {
-				entities.add(new FDestroyable(this, xSpawn, -96.0f, 64, 64, 15.0f, 0, BitmapFactory.decodeResource(game.context.getResources(),
-						R.drawable.red), lvlHealth));
-			}
-			
-			startTime = System.currentTimeMillis();
+			levelLabel.label = "Level: " + level;
+			livesLabel.label = "Lives: " + lives;
+		}
+		if(lives <= 0) {
+			if(!gameOver)
+				entities.add(new Label(this, 10, 100, "Game Over", 200.0f));
+			gameOver = true;
 		}
 		
-		levelLabel.label = "Level: " + level;
-		livesLabel.label = "Lives: " + lives;
 		Log.d("ASDF", entities.size() + "");
 	}
 	

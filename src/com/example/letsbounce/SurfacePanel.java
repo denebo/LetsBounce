@@ -75,9 +75,12 @@ public class SurfacePanel extends SurfaceView implements SurfaceHolder.Callback 
 				FDestroyable e_ = (FDestroyable)e;
 				paint.setARGB(255, 255, 255, 255);
 				paint.setTextSize(e_.width);
-				if(e_.health >= 10)
+				float healthY = e.y + e.height * 65/80;
+				if(e_.health >= 10) {
 					paint.setTextSize(e_.width / 2);
-				canvas.drawText(e_.health + "", e.x + e.width * 12/60, e.y + e.height * 65/80, paint);
+					healthY -= e.height / 4;
+				}
+				canvas.drawText(e_.health + "", e.x + e.width * 12/60, healthY, paint);
 			}
 		}
 	}

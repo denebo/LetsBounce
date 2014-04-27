@@ -13,15 +13,17 @@ public class FDestroyable extends FObject {
 	
 	@Override
 	public void touch() {
-		super.touch();
-		health -= 1;
-		if(health <= 0) {
-			for(int i = 0; i < scene.entities.size(); i++) {
-				Entity e = scene.entities.get(i);
-				if(e == this) {
-					e.y = scene.game.SCREEN_HEIGHT + 200; // remove entity
-					if(e.width == 96 * scene.game.density)
-						((GameScene)e.scene).lives += 1;
+		if(!scene.gameOver) {
+			super.touch();
+			health -= 1;
+			if(health <= 0) {
+				for(int i = 0; i < scene.entities.size(); i++) {
+					Entity e = scene.entities.get(i);
+					if(e == this) {
+						e.y = scene.game.SCREEN_HEIGHT + 200; // remove entity
+						if(e.width == 96 * scene.game.density)
+							((GameScene)e.scene).lives += 1;
+					}
 				}
 			}
 		}
