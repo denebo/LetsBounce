@@ -111,8 +111,13 @@ public class GameScene extends Scene {
 			livesLabel.label = "Lives: " + lives;
 		}
 		if(lives <= 0) {
-			if(!gameOver)
+			if(!gameOver) {
 				entities.add(new Label(this, 10, 100, "Game Over", 200.0f));
+				entities.add(new Button(this, 80, 200, 200, 100, 
+						BitmapFactory.decodeResource(game.context.getResources(), R.drawable.playagain), 
+						new Clickable(this) { public void action() { scene.game.activeScene = new GameScene(scene.game); } }
+						));
+			}
 			gameOver = true;
 		}
 		
