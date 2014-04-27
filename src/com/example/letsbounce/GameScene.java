@@ -1,28 +1,41 @@
 package com.example.letsbounce;
 
+import java.util.Random;
+
 import android.graphics.BitmapFactory;
 import android.util.Log;
 
 public class GameScene extends Scene {
 	public float gravity, mYCap, mYPad, mXCap;
-	Label scoreLabel;
-	public int score;
+	Label levelLabel, livesLabel;
+	public int score, level, spawnRate;
+	int lvlHealth, lives;
 	boolean spawned;
+	long startTime, elapsedTime;
 	
 	public GameScene(LetsBounce game) {
 		super(game);
-		gravity = 1.0f;
-		mYCap = 15.0f;
-		mYPad = 5.0f;
-		mXCap = 8.0f;
-		score = 0;
-		spawned = false;
 	}
 	
 	@Override
 	public void initialize() {
-		scoreLabel = new Label(this, 100, 100, "Score: 0", 100.0f);
-		entities.add(scoreLabel);
+		gravity = 0.15f;
+		mYCap = 15.0f;
+		mYPad = 5.0f;
+		mXCap = 8.0f;
+		lives = 3;
+		level = 0;
+		spawned = false;
+		spawnRate = 30;
+		startTime = System.currentTimeMillis();
+		lvlHealth = 0;
+		levelLabel = new Label(this, 10, 570, "Level: " + level, 100.0f);
+		livesLabel = new Label(this, 10, 620, "Lives: " + lives, 100.0f);
+		livesLabel.r = 255;
+		livesLabel.g = 50;
+		livesLabel.b = 50;
+		entities.add(levelLabel);
+		entities.add(livesLabel);
 	}
 	
 	@Override
@@ -38,7 +51,7 @@ public class GameScene extends Scene {
 					Entity ec_ = entities.get(j);
 					if(ec_ instanceof FObject) {
 						FObject ec = (FObject)entities.get(j);
-						if(e != ec) {
+						if(e != ec && (!e.spawning && !ec.spawning)) {
 							float dX = e.getCenterX() - ec.getCenterX();
 							float dY = e.getCenterY() - ec.getCenterY();
 							double hyp = Math.sqrt(dX * dX + dY * dY);
@@ -57,33 +70,48 @@ public class GameScene extends Scene {
 					}
 				}
 			}
-			scoreLabel.label = "Score: " + score;
 		}
 		
 		// remove objects that fall below screen
 		for(int i = 0; i < entities.size(); i++) {
 			Entity e = entities.get(i);
 			if(e.y > game.SCREEN_HEIGHT) {
-				if(e instanceof FDestroyable)
-					score -= ((FDestroyable) e).score;
+				if(e.width != 96 * game.density && e.y < game.SCREEN_HEIGHT + 100)
+					lives -= 1;
 				entities.remove(i);
 			}
 		}
 		
-		if((score % 5 == 0) && !spawned) {
-			spawned = true;
-			entities.add(new FDestroyable(this, 50, -96.0f, 64, 64, 15.0f, BitmapFactory.decodeResource(game.context.getResources(), R.drawable.red), 5, 1));
-			entities.add(new FDestroyable(this, 50, -96.0f, 96, 96, 15.0f, BitmapFactory.decodeResource(game.context.getResources(), R.drawable.green), 5, 1));
+		// Spawning and levels
+		elapsedTime = System.currentTimeMillis() - startTime;
+		float xSpawn = new Random().nextInt(250);
+		if(elapsedTime > spawnRate * 1000 || entities.size() == 2) {
+			level++;
+			
+			if(level < 15) 
+				lvlHealth = level + 1;
+			if(level <= 6) {
+				spawnRate = 10 - level;
+			}
+			
+			if(level % 5 == 0 && level != 1) {
+				entities.add(new FDestroyable(this, xSpawn, -96.0f, 96, 96, 15.0f, 0.35f, BitmapFactory.decodeResource(game.context.getResources(),
+						R.drawable.green), 3));
+			} else {
+				entities.add(new FDestroyable(this, xSpawn, -96.0f, 64, 64, 15.0f, 0, BitmapFactory.decodeResource(game.context.getResources(),
+						R.drawable.red), lvlHealth));
+			}
+			
+			startTime = System.currentTimeMillis();
 		}
 		
+		levelLabel.label = "Level: " + level;
+		livesLabel.label = "Lives: " + lives;
 		Log.d("ASDF", entities.size() + "");
 	}
 	
 	@Override
 	public void touched(Entity e) {
-		spawned = false;
-		if(e instanceof FDestroyable) {
-			score += ((FDestroyable) e).score;
-		}
+		
 	}
 }
