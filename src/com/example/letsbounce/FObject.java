@@ -6,31 +6,27 @@ import android.util.Log;
 public class FObject extends Entity {
 	GameScene scene;
 	int touched;
-	float mX, mY, bounce;
+	float mX, mY, bounce, gravity;
 	boolean spawning;
 	
-	public FObject(GameScene scene, float x, float y, float width, float height, float bounce, Bitmap bmap) {
+	public FObject(GameScene scene, float x, float y, float width, float height, float bounce, float gravity, Bitmap bmap) {
 		super(scene, x, y, width, height, bmap);
 		this.bounce = bounce;
 		this.scene = scene;
 		touched = 0;
 		spawning = true;
+		this.gravity = gravity;
 	}
 	
 	@Override
 	public void process() {
 		super.process();
 		
-		mY += scene.gravity;
+		mY += scene.gravity + gravity;
 		y += mY;
 		x += mX;
 		
-		if(!spawning) {
-	//		if(mY > scene.mYCap)
-	//			mY = scene.mYCap;
-	//		else if(mY < -scene.mYCap - scene.mYPad)
-	//			mY = -scene.mYCap;
-			
+		if(!spawning) {			
 			if(mX > scene.mXCap)
 				mX = scene.mXCap;
 			
