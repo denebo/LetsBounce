@@ -23,7 +23,9 @@ public class LetsBounce {
 		scenes = new ArrayList<Scene>();
 		
 		Scene mainMenu = new Scene(this);
-		mainMenu.entities.add(new Button(mainMenu, 80, 200, 200, 100, 
+		mainMenu.entities.add(new Entity(mainMenu, 0, 0, 300, 200,
+				BitmapFactory.decodeResource(context.getResources(), R.drawable.logo)));
+		mainMenu.entities.add(new Button(mainMenu, 75, 370, 200, 100, 
 				BitmapFactory.decodeResource(context.getResources(), R.drawable.play), 
 				new Clickable(mainMenu) { public void action() { scene.game.activeScene = new GameScene(scene.game); } }
 				));
