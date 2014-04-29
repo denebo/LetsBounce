@@ -30,8 +30,8 @@ public class GameScene extends Scene {
 		spawnRate = 30;
 		startTime = System.currentTimeMillis();
 		lvlHealth = 0;
-		scoreLabel = new Label(this, 10 / game.density + 60, game.SCREEN_HEIGHT / game.density - 5, "Score: " + score, 100.0f);
-		livesLabel = new Label(this, 10 / game.density + 60, game.SCREEN_HEIGHT / game.density - 40, "Lives: " + lives, 100.0f);
+		scoreLabel = new Label(this, 10 / game.density + 60, game.SCREEN_HEIGHT / game.density - 5, "Score: " + score, 100.0f, false);
+		livesLabel = new Label(this, 10 / game.density + 60, game.SCREEN_HEIGHT / game.density - 40, "Lives: " + lives, 100.0f, false);
 		livesLabel.r = 255;
 		livesLabel.g = 50;
 		livesLabel.b = 50;
@@ -113,7 +113,7 @@ public class GameScene extends Scene {
 		}
 		if(lives <= 0) {
 			if(!gameOver) {
-				entities.add(new Label(this, game.SCREEN_WIDTH / 2 / game.density, 100, "Game Over", 200.0f));
+				entities.add(new Label(this, game.SCREEN_WIDTH / 2 / game.density, 100, "Game Over", 200.0f, true));
 				entities.add(new Button(this, game.SCREEN_WIDTH / 2 / game.density - 100, 200, 200, 100, 
 						BitmapFactory.decodeResource(game.context.getResources(), R.drawable.playagain), 
 						new Clickable(this) { public void action() { scene.game.activeScene = new GameScene(scene.game); } }
@@ -126,7 +126,7 @@ public class GameScene extends Scene {
 				}
 				highScore = game.pref.getInt("score", 200);
 				
-				entities.add(new Label(this, game.SCREEN_WIDTH / 2 / game.density, 185, "Highscore: " + highScore, 100.0f));
+				entities.add(new Label(this, game.SCREEN_WIDTH / 2 / game.density, 185, "Highscore: " + highScore, 100.0f, true));
 			}
 			gameOver = true;
 		}		
