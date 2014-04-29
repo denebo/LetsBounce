@@ -70,7 +70,10 @@ public class SurfacePanel extends SurfaceView implements SurfaceHolder.Callback 
 				Label label = (Label)e;
 				paint.setARGB(255, label.r, label.g, label.b);
 				paint.setTextSize(label.size);
-				canvas.drawText(label.label, label.x - paint.measureText(label.label) / 2, label.y - label.size / 2, paint);
+				float labelX = label.x;
+				if(label.centered)
+					labelX = label.x - paint.measureText(label.label) / 2;
+				canvas.drawText(label.label, labelX, label.y - label.size / 2, paint);
 			} else if(e instanceof FDestroyable) {
 				FDestroyable e_ = (FDestroyable)e;
 				paint.setARGB(255, 255, 255, 255);
