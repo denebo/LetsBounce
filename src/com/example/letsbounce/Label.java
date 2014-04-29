@@ -5,7 +5,7 @@ public class Label extends Entity {
 	int r, g, b;
 	float size;
 	
-	public Label(Scene scene, int x, int y, String label, float size) {
+	public Label(Scene scene, float x, float y, String label, float size) {
 		super(scene, x, y, 0, 0);
 		this.label = label;
 		this.size = size;
