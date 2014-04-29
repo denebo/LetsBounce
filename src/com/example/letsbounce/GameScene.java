@@ -2,13 +2,14 @@ package com.example.letsbounce;
 
 import java.util.Random;
 
+import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 
 public class GameScene extends Scene {
 	public float gravity, mYCap, mYPad, mXCap;
-	Label levelLabel, livesLabel;
-	public int score, level, spawnRate;
+	Label scoreLabel, livesLabel;
+	public int score, spawnRate;
 	int lvlHealth, lives;
 	boolean spawned, gameOver;
 	long startTime, elapsedTime;
@@ -24,17 +25,17 @@ public class GameScene extends Scene {
 		mYPad = 5.0f;
 		mXCap = 8.0f;
 		lives = 3;
-		level = 0;
+		score = 0;
 		spawned = false;
 		spawnRate = 30;
 		startTime = System.currentTimeMillis();
 		lvlHealth = 0;
-		levelLabel = new Label(this, 10, 570, "Level: " + level, 100.0f);
+		scoreLabel = new Label(this, 10, 570, "Score: " + score, 100.0f);
 		livesLabel = new Label(this, 10, 620, "Lives: " + lives, 100.0f);
 		livesLabel.r = 255;
 		livesLabel.g = 50;
 		livesLabel.b = 50;
-		entities.add(levelLabel);
+		entities.add(scoreLabel);
 		entities.add(livesLabel);
 		gameOver = false;
 	}
@@ -88,15 +89,15 @@ public class GameScene extends Scene {
 			elapsedTime = System.currentTimeMillis() - startTime;
 			float xSpawn = new Random().nextInt(250);
 			if(elapsedTime > spawnRate * 1000 || entities.size() == 2) {
-				level++;
+				score++;
 				
-				if(level < 15) 
-					lvlHealth = level + 1;
-				if(level <= 6) {
-					spawnRate = 10 - level;
+				if(score < 15) 
+					lvlHealth = score + 1;
+				if(score <= 6) {
+					spawnRate = 10 - score;
 				}
 				
-				if(level % 5 == 0 && level != 1) {
+				if(score % 5 == 0 && score != 1) {
 					entities.add(new FDestroyable(this, xSpawn, -96.0f, 96, 96, 15.0f, 0.35f, BitmapFactory.decodeResource(game.context.getResources(),
 							R.drawable.green), 3));
 				} else {
@@ -107,7 +108,7 @@ public class GameScene extends Scene {
 				startTime = System.currentTimeMillis();
 			}
 			
-			levelLabel.label = "Level: " + level;
+			scoreLabel.label = "Score: " + score;
 			livesLabel.label = "Lives: " + lives;
 		}
 		if(lives <= 0) {
@@ -117,11 +118,18 @@ public class GameScene extends Scene {
 						BitmapFactory.decodeResource(game.context.getResources(), R.drawable.playagain), 
 						new Clickable(this) { public void action() { scene.game.activeScene = new GameScene(scene.game); } }
 						));
+				int highScore = game.pref.getInt("score", 1);
+				if(score > highScore) {
+					highScore = score;
+					SharedPreferences.Editor editor = game.pref.edit().putInt("score", score);
+					editor.commit();
+				}
+				highScore = game.pref.getInt("score", 200);
+				
+				entities.add(new Label(this, 72, 185, "Highscore: " + highScore, 100.0f));
 			}
 			gameOver = true;
-		}
-		
-		Log.d("ASDF", entities.size() + "");
+		}		
 	}
 	
 	@Override
