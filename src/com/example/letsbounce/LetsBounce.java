@@ -1,11 +1,13 @@
 package com.example.letsbounce;
 
 import java.util.ArrayList;
+
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
-import android.util.Log;
 
 public class LetsBounce {
+	SharedPreferences pref;
 	int SCREEN_WIDTH, SCREEN_HEIGHT;
 	Context context;
 	Touch touch;
@@ -31,6 +33,7 @@ public class LetsBounce {
 				));
 		
 		activeScene = mainMenu;
+		pref = context.getSharedPreferences("com.example.letsbounce", context.MODE_PRIVATE);
 	}
 	
 	public void process() {
