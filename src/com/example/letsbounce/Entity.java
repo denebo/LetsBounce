@@ -28,6 +28,10 @@ public class Entity {
 	
 	public float getCenterX() { return x + width / 2; }
 	public float getCenterY() { return y + height / 2; }
+	public float getRawX() { return x / scene.game.density; }
+	public float getRawY() { return y / scene.game.density; }
+	public float getRawWidth() { return width / scene.game.density; }
+	public float getRawHeight() { return height / scene.game.density; }
 	
 	public void touch() {
 		

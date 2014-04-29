@@ -27,13 +27,17 @@ public class LetsBounce {
 		Scene mainMenu = new Scene(this);
 		mainMenu.entities.add(new Entity(mainMenu, 0, 0, 300, 200,
 				BitmapFactory.decodeResource(context.getResources(), R.drawable.logo)));
-		mainMenu.entities.add(new Button(mainMenu, 75, 370, 200, 100, 
+//		mainMenu.entities.add(new Button(mainMenu, 75, 370, 200, 100, 
+//				BitmapFactory.decodeResource(context.getResources(), R.drawable.play), 
+//				new Clickable(mainMenu) { public void action() { scene.game.activeScene = new GameScene(scene.game); } }
+//				));
+		mainMenu.entities.add(new Button(mainMenu, SCREEN_WIDTH / 2 / density - 100, SCREEN_HEIGHT / 2 / density, 200, 100, 
 				BitmapFactory.decodeResource(context.getResources(), R.drawable.play), 
 				new Clickable(mainMenu) { public void action() { scene.game.activeScene = new GameScene(scene.game); } }
 				));
 		
 		activeScene = mainMenu;
-		pref = context.getSharedPreferences("com.example.letsbounce", context.MODE_PRIVATE);
+		pref = context.getSharedPreferences("com.example.letsbounce", Context.MODE_PRIVATE);
 	}
 	
 	public void process() {
