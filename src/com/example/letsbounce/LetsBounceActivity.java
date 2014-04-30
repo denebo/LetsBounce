@@ -7,7 +7,7 @@ import android.view.Menu;
 import android.view.Window;
 import android.view.WindowManager;
 
-public class LetsBounceActivity extends Activity {
+public class LetsBounceActivity extends AbstractActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
