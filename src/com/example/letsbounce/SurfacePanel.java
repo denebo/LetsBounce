@@ -69,11 +69,8 @@ public class SurfacePanel extends SurfaceView implements SurfaceHolder.Callback 
 			if(e instanceof Label) {
 				Label label = (Label)e;
 				paint.setARGB(255, label.r, label.g, label.b);
-				paint.setTextSize(label.size);
-				float labelX = label.x;
-				if(label.centered)
-					labelX = label.x - paint.measureText(label.label) / 2;
-				canvas.drawText(label.label, labelX, label.y - label.size / 2, paint);
+				paint.setTextSize(getResources().getDimensionPixelSize((int)label.size));
+				canvas.drawText(label.label, label.x * mGame.density, label.y, paint);
 			} else if(e instanceof FDestroyable) {
 				FDestroyable e_ = (FDestroyable)e;
 				paint.setARGB(255, 255, 255, 255);
