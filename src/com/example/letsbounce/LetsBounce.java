@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.AssetFileDescriptor;
 import android.graphics.BitmapFactory;
+import android.media.MediaPlayer;
 
 public class LetsBounce {
 	SharedPreferences pref;
@@ -12,9 +14,11 @@ public class LetsBounce {
 	Context context;
 	Touch touch;
 	float density;
+	static MediaPlayer backgroundMusic;
 	
 	ArrayList<Scene> scenes;
 	Scene activeScene, gameOver;
+	
 	
 	public LetsBounce(Context context, Touch touch) {
 		this.context = context;
@@ -23,6 +27,7 @@ public class LetsBounce {
 		SCREEN_WIDTH = context.getResources().getDisplayMetrics().widthPixels;
 		SCREEN_HEIGHT = context.getResources().getDisplayMetrics().heightPixels;
 		scenes = new ArrayList<Scene>();
+
 		
 		Scene mainMenu = new Scene(this);
 		mainMenu.entities.add(new Entity(mainMenu, 0, 0, 300, 200,
@@ -44,4 +49,5 @@ public class LetsBounce {
 		activeScene.process();
 		touch.clicking = false; // for synchronization
 	}
+	
 }
